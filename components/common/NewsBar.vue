@@ -1,6 +1,6 @@
 <template>
-  <div>
-    TOP
+  <div class="w-[370px]">
+    news
   </div>
 </template>
 
