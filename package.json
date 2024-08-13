@@ -15,7 +15,8 @@
     "@nuxt/eslint": "^0.5.0",
     "@nuxt/icon": "^1.4.5",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "vue": "latest",
+    "vue3-circle-progress": "^1.0.7"
   },
   "devDependencies": {
     "@iconify-json/fa-solid": "^1.1.9",

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[370px]">
+  <div class="w-[350px] mr-[70px]">
     news
   </div>
 </template>

@@ -1,7 +1,7 @@
 export const menuItems = [
   {
     id: 1,
-    path: '/',
+    path: '/home',
     size: '32',
     iconName: 'humbleicons:home',
     title: 'Home',

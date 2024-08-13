@@ -1,6 +1,6 @@
 <template>
   <div>
-    TOP
+    <HomeTopTabs />
   </div>
 </template>
 

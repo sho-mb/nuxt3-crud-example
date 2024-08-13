@@ -21,7 +21,16 @@
                   :title="item.title"
                 />
               </div>
-              <CommonPostButton class="my-4"/>
+              <div class="w-[90%]">
+                <CommonPostButton
+                  size="xl"
+                  path="/compose/post"
+                  padding="p-3 py-4"
+                  name="Post"
+                  class="my-4"
+                  :block="true"
+                />
+              </div>
             </div>
             <CommonUserAvator class="my-3" />
           </div>
