@@ -7,10 +7,22 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.5.0",
+    "@nuxt/icon": "^1.4.5",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "vue": "latest",
+    "vue3-circle-progress": "^1.0.7"
+  },
+  "devDependencies": {
+    "@iconify-json/fa-solid": "^1.1.9",
+    "@nuxt/ui": "^2.18.4",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "eslint": "^9.9.0"
   }
 }
