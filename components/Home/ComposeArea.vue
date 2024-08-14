@@ -12,7 +12,7 @@
       @submit.prevent="onSubmit"
     >
       <UTextarea
-        v-model="state.content"
+        v-model="state.discription"
         autoresize
         placeholder="What is happerning?!"
         variant="none"
@@ -20,13 +20,13 @@
       <div class="border-b border-opacity-20 border-white mb-3" />
       <div class="flex ml-auto w-fit gap-4 items-center">
         <CommonCircleProgressBar
-          :characters="state.content"
+          :characters="state.discription"
         />
         <CommonPostButton
           size="xl"
           padding="py-2 px-4"
           name="Post"
-          :disabled="state.content.length <= 0 || isDisabled"
+          :disabled="state.discription.length <= 0 || isDisabled"
           type="submit"
         />
       </div>
@@ -38,18 +38,22 @@
 import { account } from '~/types/account'
 
 const getInitialData = () => {
-  return { content: '' }
+  return { discription: '' }
 }
 
 const state = ref(getInitialData())
+const id = 1
 
 const onSubmit = () => {
-  console.log(state.value)
+  $fetch(`/api/tweet/${id}`, {
+    method: 'POST',
+    body: state.value,
+  })
   state.value = getInitialData()
 }
 
 const isDisabled = computed(() => {
-  return countCharacters(state.value.content) > Math.min(280, 240 * 2)
+  return countCharacters(state.value.discription) > Math.min(280, 240 * 2)
 })
 </script>
 
