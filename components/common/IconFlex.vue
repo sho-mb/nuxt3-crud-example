@@ -4,7 +4,12 @@
       :name="name"
       :size="size"
     />
-    <div v-if="count" class="text-sm">{{ count }}</div>
+    <div
+      v-if="count"
+      class="text-sm"
+    >
+      {{ count }}
+    </div>
   </div>
 </template>
 

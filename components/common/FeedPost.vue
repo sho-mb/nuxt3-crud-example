@@ -11,9 +11,15 @@
     <div class="w-full">
       <div class="flex justify-between">
         <div class="flex gap-3 items-center">
-          <div class="font-semibold">{{ userData.name }}</div>
-          <div class="text-md opacity-30 font-light">@{{ userData.accountId }}</div>
-          <div class="text-md opacity-30 font-light">• {{ userData.date }}</div>
+          <div class="font-semibold">
+            {{ userData.name }}
+          </div>
+          <div class="text-md opacity-30 font-light">
+            @{{ userData.accountId }}
+          </div>
+          <div class="text-md opacity-30 font-light">
+            • {{ userData.date }}
+          </div>
         </div>
         <div class="opacity-30">
           <Icon
@@ -25,14 +31,16 @@
       <div>Conversation with @realDonaldTrump in 45 minutes!</div>
       <div class="flex justify-between opacity-30 mt-3">
         <CommonIconFlex
-          v-for="icon in icons" :key="icon.name"
+          v-for="icon in icons"
+          :key="icon.name"
           :name="icon.name"
           :size="icon.size"
           :count="icon.count"
         />
         <div class="flex gap-3">
           <CommonIconFlex
-            v-for="item in sharedAndBookmark" :key="item.name"
+            v-for="item in sharedAndBookmark"
+            :key="item.name"
             :name="item.name"
             :size="item.size"
           />
