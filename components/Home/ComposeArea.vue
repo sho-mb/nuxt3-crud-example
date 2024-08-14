@@ -1,5 +1,5 @@
 <template>
-  <div class="flex p-6 border-b border-opacity-20 border-white">
+  <div class="flex p-4 border-b border-opacity-20 border-white">
     <UAvatar
       :src="account.avatar"
       :alt="account.alt"
@@ -9,7 +9,7 @@
     <UForm
       :state="state"
       class="w-full"
-      @submit="onSubmit"
+      @submit.prevent="onSubmit"
     >
       <UTextarea
         v-model="state.content"
@@ -27,6 +27,7 @@
           padding="py-2 px-4"
           name="Post"
           :disabled="state.content.length <= 0 || isDisabled"
+          type="submit"
         />
       </div>
     </UForm>
@@ -36,12 +37,15 @@
 <script lang="ts" setup>
 import { account } from '~/types/account'
 
-const state = ref({
-  content: '',
-})
+const getInitialData = () => {
+  return { content: '' }
+}
+
+const state = ref(getInitialData())
 
 const onSubmit = () => {
-  console.log('submited')
+  console.log(state.value)
+  state.value = getInitialData()
 }
 
 const isDisabled = computed(() => {

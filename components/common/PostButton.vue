@@ -8,6 +8,7 @@
     :ui="{ rounded: 'rounded-full' }"
     :to="path"
     :disable="disable"
+    :type="type"
   >
     <div class="text-white text-md font-bold">
       {{ name }}
@@ -26,6 +27,7 @@ withDefaults(
     name: string
     block?: boolean
     disable?: boolean
+    type?: string
   }>(),
   {
     size: undefined,
@@ -34,6 +36,7 @@ withDefaults(
     name: 'Post',
     block: false,
     disable: false,
+    type: 'submit',
   },
 )
 </script>

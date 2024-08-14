@@ -8,7 +8,7 @@
         <HomeComposeArea />
         <div>
           <div v-if="item.key === 'forYou'">
-            Timeline 1
+            <HomeTimelineOne />
           </div>
           <div v-else-if="item.key === 'following'">
             Timeline 2
