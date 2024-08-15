@@ -1,24 +1,24 @@
 <template>
-  <div class="flex w-full p-4">
+  <div class="flex w-full p-4 border-b border-opacity-20 border-white">
     <div class="mr-2">
       <UAvatar
-        src="https://pbs.twimg.com/profile_images/1815749056821346304/jS8I28PL_400x400.jpg"
-        :alt="account.alt"
+        src="https://avatars.githubusercontent.com/u/739984?v=4"
+        alt="avotar"
         size="md"
         class="w-fit"
       />
     </div>
-    <div class="w-full">
+    <div class="w-[90%]">
       <div class="flex justify-between">
         <div class="flex gap-3 items-center">
           <div class="font-semibold">
-            {{ userData.name }}
+            {{ account.username }}
           </div>
           <div class="text-md opacity-30 font-light">
-            @{{ userData.accountId }}
+            @{{ account.userId }}
           </div>
           <div class="text-md opacity-30 font-light">
-            • {{ userData.date }}
+            • {{ formattedData }}
           </div>
         </div>
         <div class="opacity-30">
@@ -28,7 +28,7 @@
           />
         </div>
       </div>
-      <div>Conversation with @realDonaldTrump in 45 minutes!</div>
+      <div class="w-full break-words"> {{ discription }} </div>
       <div class="flex justify-between opacity-30 mt-3">
         <CommonIconFlex
           v-for="icon in icons"
@@ -51,20 +51,26 @@
 </template>
 
 <script lang="ts" setup>
-import { account } from '~/types/account'
+const props = defineProps < {
+  id: number
+  discription: string
+  postedAt: string
+  account: {
+    id: number
+    username: string
+    userId: string
+    profileDisc: string | null
+    profileImgUrl: string
+    livingLocation: string
+    createdAt: string
+  }
+}>()
 
-const date = new Date()
+console.log(props)
 
-const month = date.toLocaleString('en-US', { month: 'short' })
-const day = date.getDate()
+const formattedData = ref<string>('')
 
-const formattedDate = `${month} ${day}`
-
-const userData = {
-  name: 'Elon Musk',
-  accountId: 'elonmusk',
-  date: formattedDate,
-}
+formattedData.value = MMDDFormater(props.postedAt)
 
 const icons = [
   {

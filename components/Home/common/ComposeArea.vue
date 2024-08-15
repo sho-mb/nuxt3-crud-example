@@ -12,7 +12,7 @@
       @submit.prevent="onSubmit"
     >
       <UTextarea
-        v-model="state.discription"
+        v-model="model"
         autoresize
         placeholder="What is happerning?!"
         variant="none"
@@ -37,24 +37,24 @@
 <script lang="ts" setup>
 import { account } from '~/types/account'
 
-const getInitialData = () => {
-  return { discription: '' }
-}
+const props = defineProps<{
+  state: Record<string, string>
+}>()
 
-const state = ref(getInitialData())
-const id = 1
+const model = defineModel<string>()
 
-const onSubmit = () => {
-  $fetch(`/api/tweet/${id}`, {
-    method: 'POST',
-    body: state.value,
-  })
-  state.value = getInitialData()
-}
+// Emitの定義
+const emit = defineEmits<{
+  (e: 'submit'): void
+}>()
 
 const isDisabled = computed(() => {
-  return countCharacters(state.value.discription) > Math.min(280, 240 * 2)
+  return countCharacters(props.state.discription) > Math.min(280, 240 * 2)
 })
+
+const onSubmit = () => {
+  emit('submit')
+}
 </script>
 
 <style>

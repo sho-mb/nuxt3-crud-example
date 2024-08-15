@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeTimeline />
+    <HomeCommonTopTabs />
   </div>
 </template>
 
