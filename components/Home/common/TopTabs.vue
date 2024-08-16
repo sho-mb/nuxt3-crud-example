@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Tweets } from '~/types/tweet/tweet'
+import type { Tweet, Tweets } from '~/types/tweet/tweet'
 
 const tweetsForyou = ref<Tweets>([])
 const tweetId = ref<number>()
@@ -45,11 +45,12 @@ const isOpen = ref(false)
 const form = ref({ discription: '' })
 
 const compose = async () => {
-  await $fetch(`/api/tweet/${id}`, {
+  const reponse = await $fetch<Tweet>(`/api/tweet/${id}`, {
     method: 'POST',
     body: form.value,
   })
   form.value = getInitialData()
+  tweetsForyou.value.push(reponse)
   await fetchTweets()
 }
 
