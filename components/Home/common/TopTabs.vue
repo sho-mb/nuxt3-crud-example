@@ -13,10 +13,13 @@
         <div>
           <div v-if="item.key === 'forYou'">
             <HomeTimelineOne
+              v-model:modal="isOpen"
+              v-model:tweet-id="tweetId"
               :tweets="tweetsForyou"
+              @delete="detelePost"
             />
           </div>
-          <div v-else-if="item.key === 'following'">
+          <div v-else-if="item.key == 'following'">
             Timeline 2
           </div>
           <div v-else-if="item.key === 'softwareEngineering'">
@@ -32,10 +35,12 @@
 import type { Tweets } from '~/types/tweet/tweet'
 
 const tweetsForyou = ref<Tweets>([])
+const tweetId = ref<number>()
 const id = 1
 const getInitialData = () => {
   return { discription: '' }
 }
+const isOpen = ref(false)
 
 const form = ref({ discription: '' })
 
@@ -45,6 +50,16 @@ const compose = async () => {
     body: form.value,
   })
   form.value = getInitialData()
+  await fetchTweets()
+}
+
+const detelePost = async () => {
+  const isDeleted = await $fetch(`/api/tweet/${tweetId.value}`, {
+    method: 'DELETE',
+  })
+  if (isDeleted) {
+    isOpen.value = false
+  }
   await fetchTweets()
 }
 
