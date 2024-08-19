@@ -1,8 +1,8 @@
 <template>
   <div class="flex p-4 border-b border-opacity-20 border-white">
     <UAvatar
-      :src="account.avatar"
-      :alt="account.alt"
+      :src="accountData.avatar"
+      :alt="accountData.alt"
       size="md"
       class="w-fit"
     />
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { account } from '~/types/account'
+import { accountData } from '~/types/account'
 
 const props = defineProps<{
   state: Record<string, string>

@@ -1,23 +1,19 @@
 export const icons = [
   {
     name: 'ri:chat-1-line',
-    size: 20,
-    count: 23,
+    fetchPath: 'reply',
   },
   {
     name: 'ri:repeat-fill',
-    size: 20,
-    count: 23,
+    fetchPath: 'retweet',
   },
   {
     name: 'ri:heart-3-line',
-    size: 20,
-    count: 40,
+    fetchPath: 'like',
   },
   {
     name: 'ri:rhythm-line',
-    size: 20,
-    count: 600,
+    fetchPath: 'inpression',
   },
 ]
 

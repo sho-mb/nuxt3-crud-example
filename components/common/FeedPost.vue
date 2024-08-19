@@ -31,28 +31,31 @@
         {{ discription }}
       </div>
       <div class="flex justify-between opacity-30 mt-3">
-        <CommonIconFlex
-          v-for="icon in icons"
-          :key="icon.name"
+        <HomeCommonTweetReaction
+          v-for="(icon, index) in icons"
+          :key="index"
+          :size="20"
           :name="icon.name"
-          :size="icon.size"
-          :count="icon.count"
+          :fetch-path="icon.fetchPath"
+          :tweet-id="id"
         />
-        <div class="flex gap-3">
+        <!-- <div class="flex gap-3">
           <CommonIconFlex
             v-for="item in sharedAndBookmark"
             :key="item.name"
             :name="item.name"
             :size="item.size"
           />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { icons, sharedAndBookmark } from '~/types/common/FeedPost/feed'
+import { icons } from '~/types/common/FeedPost/feed'
+
+// import { sharedAndBookmark } from '~/types/common/FeedPost/feed'
 
 const modal = defineModel<boolean>('modal')
 const targetId = defineModel<number>('targetId')
@@ -65,8 +68,8 @@ const props = defineProps < {
     id: number
     username: string
     userId: string
-    profileDisc: string | null
-    profileImgUrl: string
+    profileDisc: string | ''
+    profileImgUrl: string | ''
     livingLocation: string
     createdAt: string
   }
@@ -75,15 +78,6 @@ const props = defineProps < {
 const formattedData = ref<string>('')
 
 formattedData.value = MMDDFormater(props.postedAt)
-
-// const detelePost = async (id: number) => {
-//   const isDeleted = await $fetch(`/api/tweet/${id}`, {
-//     method: 'DELETE',
-//   })
-//   if (isDeleted) {
-//     isOpen.value = false
-//   }
-// }
 </script>
 
 <style>

@@ -14,16 +14,26 @@
 </template>
 
 <script lang="ts" setup>
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   name: string
   size: number
-  count?: number | undefined
+  tweetId: number
+  fetchPath: string
 }>(),
 {
   name: 'ri:chat-1-line',
   size: 20,
   count: undefined,
 })
+const count = ref<number>()
+
+try {
+  const data = await $fetch<number>(`/api/${props.fetchPath}/${props.tweetId}`)
+  count.value = data
+}
+catch (e) {
+  console.log(e)
+}
 </script>
 
 <style>

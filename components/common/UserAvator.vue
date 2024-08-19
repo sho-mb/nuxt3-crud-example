@@ -3,15 +3,15 @@
     <div class="flex">
       <UAvatar
         size="md"
-        :src="account.avatar"
-        :alt="account.alt"
+        :src="accountData.avatar"
+        :alt="accountData.alt"
       />
       <div class="text-left text-sm ml-4">
         <div class="font-bold">
-          {{ account.accName }}
+          {{ accountData.accName }}
         </div>
         <div class="opacity-40">
-          {{ account.userId }}
+          {{ accountData.userId }}
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { account } from '~/types/account'
+import { accountData } from '~/types/account'
 </script>
 
 <style>
