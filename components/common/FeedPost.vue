@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full p-4 border-b border-opacity-20 border-white">
+  <div class="flex w-full p-4 border-b border-opacity-20 border-white cursor-pointer" @click="goToDetail">
     <div class="mr-2">
       <UAvatar
         src="https://avatars.githubusercontent.com/u/739984?v=4"
@@ -30,7 +30,7 @@
       <div class="w-full break-words">
         {{ discription }}
       </div>
-      <div class="flex justify-between opacity-30 mt-3">
+      <div class="flex justify-between mt-3">
         <HomeCommonTweetReaction
           v-for="(icon, index) in icons"
           :key="index"
@@ -56,6 +56,7 @@
 import { icons } from '~/types/common/FeedPost/feed'
 
 // import { sharedAndBookmark } from '~/types/common/FeedPost/feed'
+const router = useRouter()
 
 const modal = defineModel<boolean>('modal')
 const targetId = defineModel<number>('targetId')
@@ -78,6 +79,10 @@ const props = defineProps < {
 const formattedData = ref<string>('')
 
 formattedData.value = MMDDFormater(props.postedAt)
+
+const goToDetail = () => {
+  router.push(`/${props.account.userId}/status/${props.id}`)
+}
 </script>
 
 <style>
