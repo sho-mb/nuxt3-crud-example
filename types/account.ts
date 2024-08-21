@@ -5,7 +5,7 @@ export const accountData = {
   userId: '@sho-mb-cambo',
 }
 
-export type account = {
+export type Account = {
   id: number
   username: string
   userId: string

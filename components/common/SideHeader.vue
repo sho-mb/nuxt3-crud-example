@@ -32,7 +32,18 @@
                 />
               </div>
             </div>
-            <CommonUserAvator class="my-3" />
+            <div class="flex items-center">
+              <CommonUserAvator
+                class="my-3"
+                :account="account"
+              />
+              <NuxtLink>
+                <Icon
+                  name="gg:more-alt"
+                  size="20"
+                />
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +53,8 @@
 
 <script lang="ts" setup>
 import { menuItems } from '~/types/menuItems'
+
+const account = await $fetch('/api/account/xXkilin')
 </script>
 
 <style>

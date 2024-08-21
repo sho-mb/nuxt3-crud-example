@@ -14,18 +14,24 @@
       <UTextarea
         v-model="model"
         autoresize
-        placeholder="What is happerning?!"
+        :placeholder="props.placeholder"
         variant="none"
+        @click="isActive = true"
       />
-      <div class="border-b border-opacity-20 border-white mb-3" />
+      <div
+        v-if="isActive"
+        class="border-b border-opacity-20 border-white mb-3"
+      />
       <div class="flex ml-auto w-fit gap-4 items-center">
         <CommonCircleProgressBar
+          v-if="isActive"
           :characters="state.discription"
         />
         <CommonPostButton
           size="xl"
           padding="py-2 px-4"
           name="Post"
+          text-color="text-white"
           :disabled="state.discription.length <= 0 || isDisabled"
           type="submit"
         />
@@ -35,13 +41,17 @@
 </template>
 
 <script lang="ts" setup>
-import { accountData } from '~/types/account'
+import { accountData, type Account } from '~/types/account'
 
 const props = defineProps<{
   state: Record<string, string>
+  placeholder: string
+  account: Account
 }>()
-
+const isActive = ref(false)
 const model = defineModel<string>()
+
+console.log(props.account)
 
 // Emitの定義
 const emit = defineEmits<{

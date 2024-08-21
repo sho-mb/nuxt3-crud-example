@@ -1,5 +1,8 @@
 <template>
-  <div class="flex w-full p-4 border-b border-opacity-20 border-white cursor-pointer" @click="goToDetail">
+  <div
+    class="flex w-full p-4 border-b border-opacity-20 border-white cursor-pointer"
+    @click="goToDetail"
+  >
     <div class="mr-2">
       <UAvatar
         src="https://avatars.githubusercontent.com/u/739984?v=4"
@@ -32,30 +35,32 @@
       </div>
       <div class="flex justify-between mt-3">
         <HomeCommonTweetReaction
-          v-for="(icon, index) in icons"
+          v-for="(icon, index) in iconsFeed"
           :key="index"
           :size="20"
           :name="icon.name"
           :fetch-path="icon.fetchPath"
           :tweet-id="id"
         />
-        <!-- <div class="flex gap-3">
-          <CommonIconFlex
-            v-for="item in sharedAndBookmark"
-            :key="item.name"
-            :name="item.name"
-            :size="item.size"
-          />
-        </div> -->
+        <div>
+          <div class="flex gap-3">
+            <HomeCommonTweetReaction
+              v-for="(icon, index) in sharedAndBookmark"
+              :key="index"
+              :name="icon.name"
+              :size="20"
+              :tweet-id="id"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { icons } from '~/types/common/FeedPost/feed'
+import { iconsFeed, sharedAndBookmark } from '~/types/common/FeedPost/feed'
 
-// import { sharedAndBookmark } from '~/types/common/FeedPost/feed'
 const router = useRouter()
 
 const modal = defineModel<boolean>('modal')

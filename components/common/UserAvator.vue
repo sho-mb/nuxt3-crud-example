@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center w-[90%] justify-between p-3">
+  <div class="flex items-center w-[90%] justify-between">
     <div class="flex">
       <UAvatar
         size="md"
@@ -8,24 +8,41 @@
       />
       <div class="text-left text-sm ml-4">
         <div class="font-bold">
-          {{ accountData.accName }}
+          {{ account.username }}
         </div>
         <div class="opacity-40">
-          {{ accountData.userId }}
+          {{ account.userId }}
         </div>
       </div>
     </div>
-    <NuxtLink>
-      <Icon
-        name="gg:more-alt"
-        size="20"
-      />
-    </NuxtLink>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { accountData } from '~/types/account'
+
+const props = withDefaults(defineProps<{
+  account: {
+    id: number
+    username: string
+    userId: string
+    profileDisc: string | ''
+    profileImgUrl: string | ''
+    livingLocation: string
+    createdAt: string
+  }
+}>(), {
+  account: {
+    id: 0,
+    username: '',
+    userId: '',
+    profileDisc: '',
+    profileImgUrl: '',
+    livingLocation: '',
+    createdAt: '',
+  },
+})
+console.log(props.account)
 </script>
 
 <style>

@@ -7,7 +7,9 @@
       <template #item="{ item }">
         <HomeCommonComposeArea
           v-model="form.discription"
+          :account="data"
           :state="form"
+          placeholder="What's happening?!"
           @submit="compose"
         />
         <div>
@@ -32,6 +34,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Account } from '~/types/account'
 import type { Tweet, Tweets } from '~/types/tweet/tweet'
 
 const tweetsForyou = ref<Tweets>([])
@@ -43,6 +46,8 @@ const getInitialData = () => {
 const isOpen = ref(false)
 
 const form = ref({ discription: '' })
+
+const data = await $fetch<Account>(`/api/account/xXkilin`)
 
 const compose = async () => {
   const reponse = await $fetch<Tweet>(`/api/tweet/${id}`, {

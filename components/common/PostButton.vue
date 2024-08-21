@@ -10,7 +10,10 @@
     :disable="disable"
     :type="type"
   >
-    <div class="text-white text-md font-bold">
+    <div
+      class="text-md font-bold"
+      :class="textColor"
+    >
       {{ name }}
     </div>
   </UButton>
@@ -28,6 +31,7 @@ withDefaults(
     block?: boolean
     disable?: boolean
     type?: string
+    textColor?: string
     color?: ButtonColor | undefined
   }>(),
   {

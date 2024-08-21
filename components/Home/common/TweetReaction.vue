@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<{
   name: string
   size: number
   tweetId: number
-  fetchPath: string
+  fetchPath?: string
 }>(),
 {
   name: 'ri:chat-1-line',
