@@ -59,7 +59,7 @@ else if (props.fetchPath === 'like') {
 }
 
 try {
-  const data = await $fetch<number>(`/api/${props.fetchPath}/${props.tweetId}`)
+  const data = await $fetch<number>(`/api/${props.fetchPath}/count/${props.tweetId}`)
   count.value = data
 }
 catch (e) {

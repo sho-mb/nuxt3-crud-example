@@ -38,6 +38,14 @@
         placeholder="Post your reply"
         @submit="compose"
       />
+      <CommonListReply
+        v-for="reply in replies" :key="reply.id"
+        :account="account"
+        :reply="reply"
+      />
+      <!-- <HomeTimelineOne
+        :tweets="replies"
+      /> -->
     </div>
   </div>
 </template>
@@ -45,7 +53,10 @@
 <script lang="ts" setup>
 import type { Account } from '~/types/account'
 import { iconsDetail } from '~/types/common/FeedPost/feed'
+import type { Reply } from '~/types/reply'
 import type { Tweet } from '~/types/tweet/tweet'
+
+const replies = ref<Reply[]>()
 
 const props = defineProps<{
   tweet: Tweet
@@ -57,16 +68,18 @@ const getInitialData = () => {
 }
 const form = ref({ discription: '' })
 
-console.log(props.tweet)
-
 const compose = async () => {
-  const reponse = await $fetch<Tweet>(`/api/tweet/${props.account.id}`, {
+  const response = await $fetch<Reply>(`/api/reply/xXkilin/${props.tweet.id}`, {
     method: 'POST',
     body: form.value,
   })
   form.value = getInitialData()
-  console.log(reponse)
+  replies.value?.push(response)
 }
+onMounted(async () => {
+  const data = await $fetch<Reply[]>(`/api/reply/${props.tweet.id}`)
+  replies.value = data
+})
 </script>
 
 <style>

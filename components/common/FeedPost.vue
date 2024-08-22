@@ -1,7 +1,6 @@
 <template>
   <div
     class="flex w-full p-4 border-b border-opacity-20 border-white cursor-pointer"
-    @click="goToDetail"
   >
     <div class="mr-2">
       <UAvatar
@@ -13,15 +12,19 @@
     </div>
     <div class="w-[90%]">
       <div class="flex justify-between">
-        <div class="flex gap-3 items-center">
-          <div class="font-semibold">
-            {{ account.username }}
-          </div>
-          <div class="text-md opacity-30 font-light">
-            @{{ account.userId }}
-          </div>
-          <div class="text-md opacity-30 font-light">
-            • {{ formattedData }}
+        <div @click="goToDetail">
+          <div class="flex justify-between">
+            <div class="flex gap-3 items-center">
+              <div class="font-semibold">
+                {{ account.username }}
+              </div>
+              <div class="text-md opacity-30 font-light">
+                @{{ account.userId }}
+              </div>
+              <div class="text-md opacity-30 font-light">
+                • {{ formattedData }}
+              </div>
+            </div>
           </div>
         </div>
         <HomeCommonDropdownMenu
@@ -30,9 +33,10 @@
           v-model:targetId="targetId"
         />
       </div>
-      <div class="w-full break-words">
+      <div @click="goToDetail" class="w-full break-words">
         {{ discription }}
       </div>
+
       <div class="flex justify-between mt-3">
         <HomeCommonTweetReaction
           v-for="(icon, index) in iconsFeed"

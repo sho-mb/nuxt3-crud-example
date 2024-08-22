@@ -52,9 +52,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { Account } from '~/types/account'
 import { menuItems } from '~/types/menuItems'
 
-const account = await $fetch('/api/account/xXkilin')
+const account = await $fetch<Account>('/api/account/xXkilin')
 </script>
 
 <style>

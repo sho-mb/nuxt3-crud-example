@@ -10,7 +10,7 @@ export type Account = {
   username: string
   userId: string
   profileDisc: string | ''
-  profileImgUrl: string | ''
+  profileImgUrl: string
   livingLocation: string
   createdAt: string
 }
