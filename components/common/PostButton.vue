@@ -2,7 +2,7 @@
   <UButton
     :block="block"
     :size="size"
-    color="sky"
+    :color="color"
     variant="solid"
     :class="padding"
     :ui="{ rounded: 'rounded-full' }"
@@ -10,14 +10,17 @@
     :disable="disable"
     :type="type"
   >
-    <div class="text-white text-md font-bold">
+    <div
+      class="text-md font-bold"
+      :class="textColor"
+    >
       {{ name }}
     </div>
   </UButton>
 </template>
 
 <script lang="ts" setup>
-import type { ButtonSize } from '/Users/kisho/eclipse-workspace/crud-example/node_modules/@nuxt/ui/dist/runtime/types/button'
+import type { ButtonSize, ButtonColor } from '/Users/kisho/eclipse-workspace/crud-example/node_modules/@nuxt/ui/dist/runtime/types/button'
 
 withDefaults(
   defineProps<{
@@ -28,6 +31,8 @@ withDefaults(
     block?: boolean
     disable?: boolean
     type?: string
+    textColor?: string
+    color?: ButtonColor | undefined
   }>(),
   {
     size: undefined,
@@ -37,6 +42,7 @@ withDefaults(
     block: false,
     disable: false,
     type: 'submit',
+    color: 'sky',
   },
 )
 </script>

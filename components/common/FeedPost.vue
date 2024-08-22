@@ -1,49 +1,61 @@
 <template>
-  <div class="flex w-full p-4">
+  <div
+    class="flex w-full p-4 border-b border-opacity-20 border-white cursor-pointer"
+  >
     <div class="mr-2">
       <UAvatar
-        src="https://pbs.twimg.com/profile_images/1815749056821346304/jS8I28PL_400x400.jpg"
-        :alt="account.alt"
+        src="https://avatars.githubusercontent.com/u/739984?v=4"
+        alt="avotar"
         size="md"
         class="w-fit"
       />
     </div>
-    <div class="w-full">
+    <div class="w-[90%]">
       <div class="flex justify-between">
-        <div class="flex gap-3 items-center">
-          <div class="font-semibold">
-            {{ userData.name }}
-          </div>
-          <div class="text-md opacity-30 font-light">
-            @{{ userData.accountId }}
-          </div>
-          <div class="text-md opacity-30 font-light">
-            • {{ userData.date }}
+        <div @click="goToDetail">
+          <div class="flex justify-between">
+            <div class="flex gap-3 items-center">
+              <div class="font-semibold">
+                {{ account.username }}
+              </div>
+              <div class="text-md opacity-30 font-light">
+                @{{ account.userId }}
+              </div>
+              <div class="text-md opacity-30 font-light">
+                • {{ formattedData }}
+              </div>
+            </div>
           </div>
         </div>
-        <div class="opacity-30">
-          <Icon
-            name="gg:more-alt"
-            size="20"
-          />
-        </div>
-      </div>
-      <div>Conversation with @realDonaldTrump in 45 minutes!</div>
-      <div class="flex justify-between opacity-30 mt-3">
-        <CommonIconFlex
-          v-for="icon in icons"
-          :key="icon.name"
-          :name="icon.name"
-          :size="icon.size"
-          :count="icon.count"
+        <HomeCommonDropdownMenu
+          :id="props.id"
+          v-model:modal="modal"
+          v-model:targetId="targetId"
         />
-        <div class="flex gap-3">
-          <CommonIconFlex
-            v-for="item in sharedAndBookmark"
-            :key="item.name"
-            :name="item.name"
-            :size="item.size"
-          />
+      </div>
+      <div @click="goToDetail" class="w-full break-words">
+        {{ discription }}
+      </div>
+
+      <div class="flex justify-between mt-3">
+        <HomeCommonTweetReaction
+          v-for="(icon, index) in iconsFeed"
+          :key="index"
+          :size="20"
+          :name="icon.name"
+          :fetch-path="icon.fetchPath"
+          :tweet-id="id"
+        />
+        <div>
+          <div class="flex gap-3">
+            <HomeCommonTweetReaction
+              v-for="(icon, index) in sharedAndBookmark"
+              :key="index"
+              :name="icon.name"
+              :size="20"
+              :tweet-id="id"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -51,54 +63,35 @@
 </template>
 
 <script lang="ts" setup>
-import { account } from '~/types/account'
+import { iconsFeed, sharedAndBookmark } from '~/types/common/FeedPost/feed'
 
-const date = new Date()
+const router = useRouter()
 
-const month = date.toLocaleString('en-US', { month: 'short' })
-const day = date.getDate()
+const modal = defineModel<boolean>('modal')
+const targetId = defineModel<number>('targetId')
 
-const formattedDate = `${month} ${day}`
+const props = defineProps < {
+  id: number
+  discription: string
+  postedAt: string
+  account: {
+    id: number
+    username: string
+    userId: string
+    profileDisc: string | ''
+    profileImgUrl: string | ''
+    livingLocation: string
+    createdAt: string
+  }
+}>()
 
-const userData = {
-  name: 'Elon Musk',
-  accountId: 'elonmusk',
-  date: formattedDate,
+const formattedData = ref<string>('')
+
+formattedData.value = MMDDFormater(props.postedAt)
+
+const goToDetail = () => {
+  router.push(`/${props.account.userId}/status/${props.id}`)
 }
-
-const icons = [
-  {
-    name: 'ri:chat-1-line',
-    size: 20,
-    count: 23,
-  },
-  {
-    name: 'ri:repeat-fill',
-    size: 20,
-    count: 23,
-  },
-  {
-    name: 'ri:heart-3-line',
-    size: 20,
-    count: 40,
-  },
-  {
-    name: 'ri:rhythm-line',
-    size: 20,
-    count: 600,
-  },
-]
-
-const sharedAndBookmark = [
-  {
-    name: 'ri:bookmark-line',
-    size: 20,
-  },
-  {
-    name: 'ri:upload-2-line',
-    size: 20,
-  },
-]
 </script>
 
 <style>

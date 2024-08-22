@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <HomeTimeline />
-  </div>
+  <div />
 </template>
 
 <script lang="ts" setup>
